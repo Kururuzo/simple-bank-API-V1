@@ -42,43 +42,43 @@ public class AccountRepositoryImplTest {
 
     @Test
     public void addAccount() throws SQLException {
-            Account account = Account.builder()
-                    .client(ClientTestData.CLIENT_1)
-                    .number("40817810500550987654")
-                    .amount(new BigDecimal(1000).setScale(2, BigDecimal.ROUND_CEILING))
-                    .currency("RUB")
-                    .build();
+        Account account = Account.builder()
+                .client(ClientTestData.CLIENT_1)
+                .number("40817810500550987654")
+                .amount(new BigDecimal(1000).setScale(2, BigDecimal.ROUND_CEILING))
+                .currency("RUB")
+                .build();
 
-            List<Account> oldAccounts = repository.getAllClientAccounts(CLIENT_1);
-            repository.addAccount(CLIENT_1, account);
-            List<Account> newAccounts = repository.getAllClientAccounts(CLIENT_1);
-            newAccounts.removeAll(oldAccounts);
-            Assert.assertEquals(1, newAccounts.size());
+        List<Account> oldAccounts = repository.getAllClientAccounts(CLIENT_1);
+        repository.addAccount(CLIENT_1, account);
+        List<Account> newAccounts = repository.getAllClientAccounts(CLIENT_1);
+        newAccounts.removeAll(oldAccounts);
+        Assert.assertEquals(1, newAccounts.size());
 
-            Account newAccount = newAccounts.get(0);
-            newAccount.setId(null);
-            ACCOUNT_MATCHER_WITHOUT_CLIENT.assertMatch(account, newAccount);
+        Account newAccount = newAccounts.get(0);
+        newAccount.setId(null);
+        ACCOUNT_MATCHER_WITHOUT_CLIENT.assertMatch(account, newAccount);
     }
 
     @Test
     public void getAllAccounts() throws SQLException {
-            List<Account> client1Accs = repository.getAllClientAccounts(CLIENT_1);
-            ACCOUNT_MATCHER_WITHOUT_CLIENT.assertMatch(client1Accs, Arrays.asList(ACCOUNT_1));
+        List<Account> client1Accs = repository.getAllClientAccounts(CLIENT_1);
+        ACCOUNT_MATCHER_WITHOUT_CLIENT.assertMatch(client1Accs, Arrays.asList(ACCOUNT_1));
     }
 
     @Test
     public void getAccById() throws SQLException {
-            Account account = repository.getAccountById(100002);
-            ACCOUNT_MATCHER_WITHOUT_CLIENT.assertMatch(account, ACCOUNT_1);
+        Account account = repository.getAccountById(100002);
+        ACCOUNT_MATCHER_WITHOUT_CLIENT.assertMatch(account, ACCOUNT_1);
     }
 
     @Test
     public void updateAccount() throws SQLException {
-            Account account = ACCOUNT_1;
-            account.setAmount(new BigDecimal(121212).setScale(2));
-            repository.updateAccount(account);
-            Account account1 = repository.getAccountById(ACCOUNT_1.getId());
-            ACCOUNT_MATCHER_WITHOUT_CLIENT.assertMatch(account, account1);
+        Account account = ACCOUNT_1;
+        account.setAmount(new BigDecimal(121212).setScale(2));
+        repository.updateAccount(account);
+        Account account1 = repository.getAccountById(ACCOUNT_1.getId());
+        ACCOUNT_MATCHER_WITHOUT_CLIENT.assertMatch(account, account1);
     }
 
     @Test
