@@ -30,8 +30,8 @@ public class Main {
             }
         } else {
 //            RunScript.execute(Utils.getConnection(), new FileReader( "src/main/resources/dataBase/H2init.SQL"));
-            RunScript.execute(Utils.getConnection(), new FileReader("src/main/resources/dataBase/H2init.SQL"));
-            RunScript.execute(Utils.getConnection(), new FileReader("src/main/resources/dataBase/H2populate.SQL"));
+//            RunScript.execute(Utils.getConnection(), new FileReader("src/main/resources/dataBase/H2init.SQL"));
+//            RunScript.execute(Utils.getConnection(), new FileReader("src/main/resources/dataBase/H2populate.SQL"));
 
             System.out.println("Starting server without argument (scripts)");
         }
